@@ -72,6 +72,7 @@ export default function App() {
   const [isAddingReview, setIsAddingReview] = useState(false);
   const [loading, setLoading] = useState(true);
   const [reviewRating, setReviewRating] = useState(5);
+  const [sliderPosition, setSliderPosition] = useState(50);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -298,7 +299,7 @@ export default function App() {
           >
             {/* Hero Section */}
             <section className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-              <motion.div style={{ y: bgY, scale }} className="absolute inset-0 z-0">
+              <motion.div className="absolute inset-0 z-0">
                 <img
                   src="https://i.postimg.cc/CLdk3ZPv/Mac-Book-Pro-closing-202604141403-ezgif-com-video-to-webp-converter.webp"
                   alt="Hero Background"
@@ -308,7 +309,7 @@ export default function App() {
                 <div className="absolute inset-0 bg-gradient-to-b from-sith-black/60 via-transparent to-sith-black" />
               </motion.div>
 
-              <motion.div style={{ y: textY, opacity }} className="relative z-10 text-center px-4">
+              <motion.div className="relative z-10 text-center px-4">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="mb-4">
                   <span className="font-orbitron text-sith-red tracking-[0.5em] text-xs font-bold uppercase">_ANIME-AI-VALORANT-</span>
                 </motion.div>
@@ -353,6 +354,77 @@ export default function App() {
                   />
                   <div className="absolute inset-0 pointer-events-none border-2 border-transparent group-hover:border-sith-red/30 transition-colors duration-500 rounded-lg" />
                 </motion.div>
+              </div>
+            </section>
+
+            {/* Before & After Slider Section */}
+            <section className="relative z-20 bg-sith-black px-6 pb-24">
+              <div className="max-w-5xl mx-auto">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }}
+                  className="text-center mb-12"
+                >
+                  <h2 className="font-orbitron text-2xl md:text-4xl font-black text-white mb-4 uppercase tracking-tighter">
+                    SKIN <span className="text-sith-red text-glow-red">TRANSFORMATION</span>
+                  </h2>
+                  <p className="text-gray-500 font-orbitron text-[10px] tracking-[0.3em] uppercase">Interactive Comparison</p>
+                </motion.div>
+
+                <div className="relative aspect-[21/9] w-full overflow-hidden rounded-[2.5rem] border border-white/10 shadow-2xl cursor-col-resize select-none group">
+                  {/* After Image (Full Background) - Prelude to Chaos */}
+                  <img 
+                    src="https://i.postimg.cc/Ghkmbmkb/prelude-to-chaos-vandal-valorant.webp" 
+                    alt="Prelude to Chaos Vandal" 
+                    className="absolute inset-0 w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                  
+                  {/* Before Image (Clipped) - Kuronami */}
+                  <div 
+                    className="absolute inset-0 w-full h-full overflow-hidden"
+                    style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+                  >
+                    <img 
+                      src="https://i.postimg.cc/KY9YCptD/Kuronami-Vandal.webp" 
+                      alt="Kuronami Vandal" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+
+                  {/* Slider Line */}
+                  <div 
+                    className="absolute inset-y-0 w-1 bg-sith-red shadow-[0_0_15px_rgba(255,0,0,0.8)] z-30 pointer-events-none"
+                    style={{ left: `${sliderPosition}%` }}
+                  >
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-sith-red rounded-full flex items-center justify-center shadow-red-glow border-2 border-white/20">
+                      <div className="flex gap-1">
+                        <div className="w-1 h-4 bg-white/40 rounded-full" />
+                        <div className="w-1 h-4 bg-white/40 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Labels */}
+                  <div className="absolute bottom-6 left-6 z-40 px-4 py-2 bg-sith-black/60 backdrop-blur-md rounded-full border border-white/10">
+                    <span className="text-white font-orbitron text-[10px] font-bold tracking-widest uppercase">LIGHT SIDE</span>
+                  </div>
+                  <div className="absolute bottom-6 right-6 z-40 px-4 py-2 bg-sith-black/60 backdrop-blur-md rounded-full border border-white/10">
+                    <span className="text-white font-orbitron text-[10px] font-bold tracking-widest uppercase">DARK SIDE</span>
+                  </div>
+
+                  {/* Invisible Input Range for Interaction */}
+                  <input 
+                    type="range" 
+                    min="0" 
+                    max="100" 
+                    value={sliderPosition} 
+                    onChange={(e) => setSliderPosition(Number(e.target.value))}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-col-resize z-50"
+                  />
+                </div>
               </div>
             </section>
 
