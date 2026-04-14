@@ -5,7 +5,7 @@
 
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import React, { useRef, useState, useEffect } from "react";
-import { Youtube, ChevronDown, Plus, Trash2, ExternalLink, LogIn, LogOut, Shield, X, Loader2, Star, MessageSquare } from "lucide-react";
+import { Youtube, ChevronDown, Plus, Trash2, ExternalLink, LogIn, LogOut, Shield, X, Loader2, Star, MessageSquare, TrendingUp, Users, MapPin, Bell } from "lucide-react";
 import { 
   collection, 
   onSnapshot, 
@@ -20,6 +20,17 @@ import {
 } from "firebase/firestore";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { db, auth, signInWithGoogle, logout, handleFirestoreError, OperationType } from "./firebase";
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip } from "recharts";
+
+const chartData = [
+  { name: "Mon", views: 4000 },
+  { name: "Tue", views: 3000 },
+  { name: "Wed", views: 5000 },
+  { name: "Thu", views: 2780 },
+  { name: "Fri", views: 6890 },
+  { name: "Sat", views: 8390 },
+  { name: "Sun", views: 9490 },
+];
 
 interface Resource {
   id: string;
@@ -346,6 +357,181 @@ export default function App() {
                   />
                   <div className="absolute inset-0 pointer-events-none border-2 border-transparent group-hover:border-sith-red/30 transition-colors duration-500 rounded-lg" />
                 </motion.div>
+              </div>
+            </section>
+
+            {/* Bento Grid Showcase */}
+            <section className="relative z-20 bg-sith-black px-6 pb-40">
+              <div className="max-w-7xl mx-auto">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }}
+                  className="text-center mb-16"
+                >
+                  <h2 className="font-orbitron text-3xl md:text-5xl font-black text-white mb-4">THE <span className="text-sith-red text-glow-red">COMMAND</span> CENTER</h2>
+                  <p className="text-gray-500 font-orbitron text-xs tracking-[0.3em] uppercase">Ecosystem Overview</p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[240px]">
+                  {/* Left Column: Tall Feature - Banner */}
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="md:row-span-2 relative group overflow-hidden rounded-[2.5rem] border border-white/5 bg-sith-charcoal/30 p-8 flex flex-col justify-end"
+                  >
+                    <div className="relative z-10">
+                      <p className="font-orbitron text-sith-red text-[10px] font-bold tracking-widest mb-2">CHANNEL ART</p>
+                      <h3 className="font-orbitron text-2xl font-black text-white leading-tight">FTXMONK<br/>OFFICIAL</h3>
+                    </div>
+                    <img 
+                      src="input_file_2.png" 
+                      className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-1000" 
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-sith-black via-transparent to-transparent opacity-60" />
+                  </motion.div>
+
+                  {/* Top Middle: Small Item 1 - About */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="relative group overflow-hidden rounded-[2.5rem] border border-white/5 bg-sith-charcoal/30 p-6"
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="w-10 h-10 bg-sith-red/20 rounded-xl flex items-center justify-center">
+                        <Shield className="text-sith-red" size={20} />
+                      </div>
+                      <span className="text-[10px] font-orbitron text-gray-500 uppercase">Editor</span>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-white text-[10px] font-bold leading-tight">Davinci Resolve 18 Expert</p>
+                      <p className="text-gray-500 text-[8px] mt-1 line-clamp-2">Neptun style and floby style AMVs & edits.</p>
+                    </div>
+                  </motion.div>
+
+                  {/* Top Right: Small Item 2 - Subs */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="relative group overflow-hidden rounded-[2.5rem] border border-white/5 bg-sith-charcoal/30 p-6 flex items-center justify-center"
+                  >
+                    <img src="input_file_3.png" className="absolute inset-0 w-full h-full object-cover opacity-10" referrerPolicy="no-referrer" />
+                    <div className="text-center relative z-10">
+                      <div className="text-4xl font-black text-white font-orbitron mb-1 text-glow-red">361</div>
+                      <div className="text-[10px] font-orbitron text-sith-red tracking-widest uppercase">Subscribers</div>
+                    </div>
+                  </motion.div>
+
+                  {/* Right Column: Tall Feature - Stats */}
+                  <motion.div 
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="md:row-span-2 relative group overflow-hidden rounded-[2.5rem] border border-white/5 bg-sith-charcoal/30 p-8"
+                  >
+                    <h3 className="font-orbitron text-lg font-bold text-white mb-6">CHANNEL INFO</h3>
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center">
+                          <Youtube className="text-sith-red" size={20} />
+                        </div>
+                        <div>
+                          <p className="text-white text-xs font-bold">137 Videos</p>
+                          <p className="text-gray-500 text-[10px] uppercase">Upload Count</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center">
+                          <TrendingUp className="text-sith-red" size={20} />
+                        </div>
+                        <div>
+                          <p className="text-white text-xs font-bold">Joined 2022</p>
+                          <p className="text-gray-500 text-[10px] uppercase">May 19, 2022</p>
+                        </div>
+                      </div>
+                      <div className="pt-4 border-t border-white/5">
+                        <p className="text-gray-400 text-[10px] italic leading-relaxed">"Every video takes a lot of effort so i appreciate a lot if u like my videos!"</p>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Middle: Large Wide Analytics - Views */}
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="md:col-span-2 relative group overflow-hidden rounded-[2.5rem] border border-white/5 bg-white p-8"
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <div>
+                        <p className="text-gray-400 text-[10px] font-orbitron uppercase tracking-widest">Total Channel Views</p>
+                        <h3 className="text-4xl font-black text-sith-black font-orbitron">232,218</h3>
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="px-3 py-1 bg-sith-red/10 rounded-full text-sith-red text-[10px] font-bold">GROWTH</div>
+                      </div>
+                    </div>
+                    <div className="h-32 w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <AreaChart data={chartData}>
+                          <defs>
+                            <linearGradient id="colorViews" x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="#FF0000" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="#FF0000" stopOpacity={0}/>
+                            </linearGradient>
+                          </defs>
+                          <Area type="monotone" dataKey="views" stroke="#FF0000" fillOpacity={1} fill="url(#colorViews)" strokeWidth={3} />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </motion.div>
+
+                  {/* Bottom Center: Location */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="md:col-span-2 relative group overflow-hidden rounded-[2.5rem] border border-white/5 bg-sith-charcoal/30 p-6 flex flex-col justify-center items-center"
+                  >
+                    <div className="w-12 h-12 bg-sith-red/20 rounded-full flex items-center justify-center mb-3">
+                      <MapPin className="text-sith-red" size={24} />
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white font-orbitron font-bold text-xs tracking-widest">INDIA</p>
+                      <p className="text-gray-500 text-[8px] uppercase tracking-widest mt-1">Base of Operations</p>
+                    </div>
+                  </motion.div>
+
+                  {/* Bottom Right: Website Link */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="md:col-span-2 relative group overflow-hidden rounded-[2.5rem] border border-white/5 bg-gradient-to-br from-sith-red/40 to-sith-black p-6 flex flex-col justify-between"
+                  >
+                    <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
+                      <ExternalLink className="text-white" size={20} />
+                    </div>
+                    <div>
+                      <p className="text-white text-[10px] font-bold">ftxmonk.netlify.app</p>
+                      <a 
+                        href="https://ftxmonk.netlify.app/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sith-red text-[8px] font-orbitron uppercase tracking-widest hover:underline"
+                      >
+                        Visit Portfolio
+                      </a>
+                    </div>
+                  </motion.div>
+                </div>
               </div>
             </section>
           </motion.div>
