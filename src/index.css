@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-orbitron: "Orbitron", sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-sith-black: #000000;
+  --color-sith-charcoal: #1A1A1A;
+  --color-sith-red: #FF0000;
+  
+  --shadow-red-glow: 0 0 15px rgba(255, 0, 0, 0.5), 0 0 30px rgba(255, 0, 0, 0.3);
+  --shadow-red-glow-strong: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.5);
+}
+
+@layer base {
+  body {
+    @apply bg-sith-black text-white selection:bg-sith-red selection:text-white;
+    font-family: var(--font-sans);
+  }
+}
+
+@layer utilities {
+  .text-glow-red {
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.4);
+  }
+  
+  .bg-glass {
+    @apply bg-sith-black/40 backdrop-blur-md border-b border-white/10;
+  }
+}

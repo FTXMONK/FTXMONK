@@ -1,0 +1,59 @@
+{
+  "entities": {
+    "Resource": {
+      "title": "Resource",
+      "description": "An editing resource shared by the admin.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "description": "Title of the resource" },
+        "description": { "type": "string", "description": "Short description" },
+        "url": { "type": "string", "format": "uri", "description": "Link to the resource" },
+        "category": { "type": "string", "enum": ["Preset", "Overlay", "SFX", "LUT", "Other"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "authorUid": { "type": "string" }
+      },
+      "required": ["title", "url", "category", "authorUid"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "A user review with rating.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string", "description": "Review content" },
+        "rating": { "type": "number", "description": "Rating from 1 to 5" },
+        "userName": { "type": "string" },
+        "userPhoto": { "type": "string" },
+        "authorUid": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["text", "rating", "userName", "authorUid", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/resources/{resourceId}": {
+      "schema": "Resource",
+      "description": "Collection of editing resources."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and roles."
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Collection of user reviews."
+    }
+  }
+}
