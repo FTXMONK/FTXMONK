@@ -80,10 +80,10 @@ export default function App() {
   });
 
   // Parallax transforms
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "150%"]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   const ADMIN_EMAIL = "mayankand1234@gmail.com";
 
@@ -302,15 +302,15 @@ export default function App() {
                 <img
                   src="https://i.postimg.cc/CLdk3ZPv/Mac-Book-Pro-closing-202604141403-ezgif-com-video-to-webp-converter.webp"
                   alt="Hero Background"
-                  className="w-full h-full object-cover opacity-60 grayscale brightness-50"
+                  className="w-full h-full object-cover opacity-90"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-sith-black/80 via-transparent to-sith-black" />
+                <div className="absolute inset-0 bg-gradient-to-b from-sith-black/60 via-transparent to-sith-black" />
               </motion.div>
 
               <motion.div style={{ y: textY, opacity }} className="relative z-10 text-center px-4">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2 }} className="mb-4">
-                  <span className="font-orbitron text-sith-red tracking-[0.5em] text-xs font-bold uppercase">The Future of Tech</span>
+                  <span className="font-orbitron text-sith-red tracking-[0.5em] text-xs font-bold uppercase">_ANIME-AI-VALORANT-</span>
                 </motion.div>
                 
                 <motion.h1 initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.2, ease: "easeOut" }} className="font-orbitron text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white text-glow-red">
@@ -318,10 +318,6 @@ export default function App() {
                 </motion.h1>
                 
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1 }} className="mt-8 max-w-lg mx-auto">
-                  <p className="text-gray-400 font-light tracking-wide text-sm md:text-base leading-relaxed">
-                    Experience the convergence of high-end hardware and cinematic storytelling. 
-                    Unveiling the dark side of technology.
-                  </p>
                 </motion.div>
               </motion.div>
 
@@ -335,7 +331,7 @@ export default function App() {
               <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
                   <h2 className="font-orbitron text-3xl md:text-5xl font-bold mb-6 text-white">
-                    <span className="text-sith-red">CINEMATIC</span> PRECISION
+                    ABOUT MY <span className="text-sith-red">CHANNEL</span>
                   </h2>
                   <p className="text-gray-400 text-lg leading-relaxed mb-8">
                     Every frame, every pixel, every sound is meticulously crafted to deliver an unparalleled viewing experience. 
